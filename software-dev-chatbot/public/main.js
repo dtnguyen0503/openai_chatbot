@@ -1,8 +1,8 @@
 const chatLog = document.getElementById('chat-log');
 const userInput = document.getElementById('user-input');
 function sendMessage() {
-    const message = userInput.ariaValueMax;
-    // Display user's messgae
+    const message = userInput.value;
+    // Display user's message
     displayMessage('user', message);
     // Call OpenAI API to get chatbot's response
     getChatbotResponse(message);
@@ -18,7 +18,6 @@ function displayMessage(sender, message) {
     // Append the <p> tag to the message element
     messageElement.appendChild(messageParagraph);
     chatLog.appendChild(messageElement);
-
 }
 function getChatbotResponse(userMessage) {
     // Make a request to your server with the user's message
@@ -28,12 +27,11 @@ function getChatbotResponse(userMessage) {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({ userMessage }),
-
     })
     .then(response => response.json())
     .then(data => {
         // Display chatbot's response
-        displayMessage('chatbot', data.getChatbotResponse);
+        displayMessage('chatbot', data.chatbotResponse);
     })
     .catch(error => console.error('Error:', error));
 }
